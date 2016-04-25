@@ -1,0 +1,126 @@
+<html>
+<head>
+<SCRIPT LANGUAGE="JavaScript">
+//<!-- Beginning of JavaScript -
+
+
+var state = 0;
+var runnin = 0;
+
+
+setInterval(function() {
+var radImg = document.getElementById('radarImg');
+
+
+//alert("sent");
+
+	radImg.src = 'test.bmp?'+new Date().getTime();
+
+if(state == 0)
+{
+	getState();
+	state = 1;
+}
+else
+{
+ getTgt();
+// getTgtVel();
+ state = 0;
+}
+	
+	
+
+
+},333);
+
+function getState()
+{
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if(xmlhttp.status == 200 && xmlhttp.readyState == 4)
+		{
+			document.getElementById('demo').innerHTML = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","index.php",true);
+	xmlhttp.send();
+}
+function getTgt()
+{
+xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if(xmlhttp.status == 200 && xmlhttp.readyState == 4)
+		{
+			document.getElementById('distance').value = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","tgt.php",true);
+	xmlhttp.send();
+xmlhttp2 = new XMLHttpRequest();
+	xmlhttp2.onreadystatechange = function()
+	{
+		if(xmlhttp2.status == 200 && xmlhttp2.readyState == 4)
+		{
+			document.getElementById('velocity').value = xmlhttp2.responseText;
+		}
+	}
+	xmlhttp2.open("GET","tgtVel.php",true);
+	xmlhttp2.send();
+}
+
+function start()
+{
+	
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if(xmlhttp.status == 200 && xmlhttp.readyState == 4)
+		{
+			textField.innerHTML = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","make.php",true);
+	xmlhttp.send();
+
+}
+function stop()
+{
+	
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if(xmlhttp.status == 200 && xmlhttp.readyState == 4)
+		{
+			textField.innerHTML = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","rmv.php",true);
+	xmlhttp.send();
+
+}
+// - End of JavaScript - -->
+</SCRIPT>
+</head>
+<body>
+<h1>Radar Display</h1>
+<img src="testBMP.bmp" id="radarImg" alt="Radar Image">
+<FORM>
+<h4> Blue ticks separated by 50nS, or 15m @ C. Red tick indicates identified peak.</h4>
+
+
+
+<INPUT NAME="submit" TYPE=Button VALUE="Start" onClick="start()">
+<INPUT NAME="submit" TYPE=Button VALUE="Stop" alt="stopButton" onClick="stop()">
+<BR>
+<BR>
+Uncalibrated distance = <INPUT NAME="txtBox" TYPE=text id="distance" SIZE=5 > meters
+<BR>
+<BR>
+Velocity = <INPUT NAME="txtBox" TYPE=text id="velocity" SIZE=5 > m/s
+</FORM>
+<b id='demo'>textshouldbehere</b>
+<p id='demo2'></p>
+</body>
+</html>
