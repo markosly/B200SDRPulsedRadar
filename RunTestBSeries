@@ -1,0 +1,1 @@
+sudo ./B200 --tx_rate 30e6 --channels="0" --rx_rate 30e6
