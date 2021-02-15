@@ -7,3 +7,5 @@ The file named RunTestBSeries calls the executible with the appropriate argument
 The project also relies on easyBMP, which is available online.
 
 The GUI is implemented as a simple webpage (index.html), which calls various php scripts to grab relevant data from the radar application.
+
+![Image of Radar GUI](https://github.com/markosly/B200SDRPulsedRadar/blob/master/WebGui.JPG)
